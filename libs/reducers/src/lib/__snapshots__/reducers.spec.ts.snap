@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers Loading-ImagesLoaded-Idle 1`] = `
+Object {
+  "images": Array [],
+  "kind": "Idle",
+}
+`;

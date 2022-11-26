@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@publitas/domain": ["libs/domain/src/index.ts"],
+      "@publitas/reducers": ["libs/reducers/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
