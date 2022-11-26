@@ -40,6 +40,22 @@ export const loadingImagesLoaded = (
   };
 };
 
+export const idleMouseDown = (
+  state: D.Idle,
+  _action: D.MouseDown
+): D.Dragging => ({
+  kind: 'Dragging',
+  images: state.images,
+});
+
+export const draggingMouseUp = (
+  state: D.Dragging,
+  _action: D.MouseUp
+): D.Idle => ({
+  kind: 'Idle',
+  images: state.images,
+});
+
 export const reducer = (state: D.State, action: D.Action): D.State => {
   switch (state.kind) {
     case 'Loading':
@@ -55,8 +71,10 @@ export const reducer = (state: D.State, action: D.Action): D.State => {
       }
     case 'Idle':
       switch (action.kind) {
-        case 'ImagesLoaded':
         case 'MouseDown':
+          console.log('MouseDown');
+          return idleMouseDown(state, action);
+        case 'ImagesLoaded':
         case 'MouseUp':
         case 'MouseMove':
           return noop(state, action);
@@ -65,8 +83,10 @@ export const reducer = (state: D.State, action: D.Action): D.State => {
       }
     case 'Dragging':
       switch (action.kind) {
-        case 'MouseDown':
         case 'MouseUp':
+          console.log('MOUSEUP');
+          return draggingMouseUp(state, action);
+        case 'MouseDown':
         case 'MouseMove':
         case 'ImagesLoaded':
           return noop(state, action);

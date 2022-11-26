@@ -54,6 +54,33 @@ export function Index() {
     }
   }, [state]);
 
+  useEffect(() => {
+    const canvas = canvasRef;
+    const ctx = canvas.current.getContext('2d');
+    const mousedown = (event: MouseEvent) => {
+      dispatch(
+        D.mouseDown({
+          event,
+          canvas: ctx, // TODO: is it necessary? If not remove canvas dependecy
+        })
+      );
+    };
+    const mouseup = (event: MouseEvent) => {
+      dispatch(
+        D.mouseUp({
+          event,
+          canvas: ctx, // TODO: is it necessary? If not remove canvas dependecy
+        })
+      );
+    };
+    canvasRef.current.addEventListener('mousedown', mousedown);
+    canvasRef.current.addEventListener('mouseup', mouseup);
+    return () => {
+      canvas.current.removeEventListener('mousedown', mousedown);
+      canvas.current.removeEventListener('mouseup', mouseup);
+    };
+  }, []);
+
   return (
     <div className={styles.page}>
       <canvas

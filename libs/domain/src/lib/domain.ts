@@ -35,7 +35,7 @@ export const initialState: State = {
 };
 
 // actions
-type MouseDown = {
+export type MouseDown = {
   kind: 'MouseDown';
   payload: {
     event: MouseEvent;
@@ -43,7 +43,7 @@ type MouseDown = {
   };
 };
 
-type MouseUp = {
+export type MouseUp = {
   kind: 'MouseUp';
   payload: {
     event: MouseEvent;
@@ -51,7 +51,7 @@ type MouseUp = {
   };
 };
 
-type MouseMove = {
+export type MouseMove = {
   kind: 'MouseMove';
   payload: {
     event: MouseEvent;
