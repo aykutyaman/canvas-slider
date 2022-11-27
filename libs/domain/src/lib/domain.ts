@@ -10,6 +10,7 @@ export type Image = {
   dy: number;
   dWidth: number;
   dHeight: number;
+  initialdx: number;
 };
 
 export type Images = {
@@ -26,6 +27,7 @@ export type Idle = {
 
 export type Dragging = {
   kind: 'Dragging';
+  pointerx: number;
 } & Images;
 
 export type State = Loading | Idle | Dragging;

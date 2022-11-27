@@ -1,8 +1,275 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`reducers Dragging-MouseMove-Dragging 1`] = `
+Object {
+  "images": Array [
+    Object {
+      "dHeight": 400,
+      "dWidth": 640,
+      "dx": -33,
+      "dy": 0,
+      "element": Object {
+        "height": 1800,
+        "width": 2880,
+      },
+      "initialdx": 0,
+      "sHeight": 1800,
+      "sWidth": 2880,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 320,
+      "dWidth": 640,
+      "dx": 607,
+      "dy": 40,
+      "element": Object {
+        "height": 750,
+        "width": 1500,
+      },
+      "initialdx": 640,
+      "sHeight": 750,
+      "sWidth": 1500,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 400,
+      "dWidth": 533.3333333333334,
+      "dx": 1300.3333333333333,
+      "dy": 0,
+      "element": Object {
+        "height": 768,
+        "width": 1024,
+      },
+      "initialdx": 1333.3333333333333,
+      "sHeight": 768,
+      "sWidth": 1024,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 400,
+      "dWidth": 266.5625,
+      "dx": 2073.71875,
+      "dy": 0,
+      "element": Object {
+        "height": 1280,
+        "width": 853,
+      },
+      "initialdx": 2106.71875,
+      "sHeight": 1280,
+      "sWidth": 853,
+      "sx": 0,
+      "sy": 0,
+    },
+  ],
+  "kind": "Dragging",
+  "pointerx": 325,
+}
+`;
+
+exports[`reducers Dragging-MouseUp-Idle 1`] = `
+Object {
+  "images": Array [
+    Object {
+      "dHeight": 400,
+      "dWidth": 640,
+      "dx": 0,
+      "dy": 0,
+      "element": Object {
+        "height": 1800,
+        "width": 2880,
+      },
+      "initialdx": 0,
+      "sHeight": 1800,
+      "sWidth": 2880,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 320,
+      "dWidth": 640,
+      "dx": 640,
+      "dy": 40,
+      "element": Object {
+        "height": 750,
+        "width": 1500,
+      },
+      "initialdx": 640,
+      "sHeight": 750,
+      "sWidth": 1500,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 400,
+      "dWidth": 533.3333333333334,
+      "dx": 1333.3333333333333,
+      "dy": 0,
+      "element": Object {
+        "height": 768,
+        "width": 1024,
+      },
+      "initialdx": 1333.3333333333333,
+      "sHeight": 768,
+      "sWidth": 1024,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 400,
+      "dWidth": 266.5625,
+      "dx": 2106.71875,
+      "dy": 0,
+      "element": Object {
+        "height": 1280,
+        "width": 853,
+      },
+      "initialdx": 2106.71875,
+      "sHeight": 1280,
+      "sWidth": 853,
+      "sx": 0,
+      "sy": 0,
+    },
+  ],
+  "kind": "Idle",
+}
+`;
+
+exports[`reducers Idle-MouseDown-Dragging 1`] = `
+Object {
+  "images": Array [
+    Object {
+      "dHeight": 400,
+      "dWidth": 640,
+      "dx": 0,
+      "dy": 0,
+      "element": Object {
+        "height": 1800,
+        "width": 2880,
+      },
+      "initialdx": 0,
+      "sHeight": 1800,
+      "sWidth": 2880,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 320,
+      "dWidth": 640,
+      "dx": 640,
+      "dy": 40,
+      "element": Object {
+        "height": 750,
+        "width": 1500,
+      },
+      "initialdx": 640,
+      "sHeight": 750,
+      "sWidth": 1500,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 400,
+      "dWidth": 533.3333333333334,
+      "dx": 1333.3333333333333,
+      "dy": 0,
+      "element": Object {
+        "height": 768,
+        "width": 1024,
+      },
+      "initialdx": 1333.3333333333333,
+      "sHeight": 768,
+      "sWidth": 1024,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 400,
+      "dWidth": 266.5625,
+      "dx": 2106.71875,
+      "dy": 0,
+      "element": Object {
+        "height": 1280,
+        "width": 853,
+      },
+      "initialdx": 2106.71875,
+      "sHeight": 1280,
+      "sWidth": 853,
+      "sx": 0,
+      "sy": 0,
+    },
+  ],
+  "kind": "Dragging",
+  "pointerx": 325,
+}
+`;
+
 exports[`reducers Loading-ImagesLoaded-Idle 1`] = `
 Object {
-  "images": Array [],
+  "images": Array [
+    Object {
+      "dHeight": 400,
+      "dWidth": 640,
+      "dx": 0,
+      "dy": 0,
+      "element": Object {
+        "height": 1800,
+        "width": 2880,
+      },
+      "initialdx": 0,
+      "sHeight": 1800,
+      "sWidth": 2880,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 320,
+      "dWidth": 640,
+      "dx": 640,
+      "dy": 40,
+      "element": Object {
+        "height": 750,
+        "width": 1500,
+      },
+      "initialdx": 640,
+      "sHeight": 750,
+      "sWidth": 1500,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 400,
+      "dWidth": 533.3333333333334,
+      "dx": 1333.3333333333333,
+      "dy": 0,
+      "element": Object {
+        "height": 768,
+        "width": 1024,
+      },
+      "initialdx": 1333.3333333333333,
+      "sHeight": 768,
+      "sWidth": 1024,
+      "sx": 0,
+      "sy": 0,
+    },
+    Object {
+      "dHeight": 400,
+      "dWidth": 266.5625,
+      "dx": 2106.71875,
+      "dy": 0,
+      "element": Object {
+        "height": 1280,
+        "width": 853,
+      },
+      "initialdx": 2106.71875,
+      "sHeight": 1280,
+      "sWidth": 853,
+      "sx": 0,
+      "sy": 0,
+    },
+  ],
   "kind": "Idle",
 }
 `;

@@ -2,6 +2,7 @@ import { useEffect, useReducer, useRef } from 'react';
 import styles from './index.module.css';
 import { reducer } from '@publitas/reducers';
 import * as D from '@publitas/domain';
+import * as _ from 'underscore';
 
 export function Index() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -27,30 +28,24 @@ export function Index() {
     if (state.kind === 'Idle' || state.kind === 'Dragging') {
       const ctx = canvasRef.current.getContext('2d');
 
-      let intervalTime = 0;
-      const interval = setInterval(() => {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        intervalTime = intervalTime - 1;
-        state.images.forEach((image) => {
-          const { dHeight, dWidth, dx, dy, element, sHeight, sWidth, sx, sy } =
-            image;
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-          ctx.drawImage(
-            element,
-            sx,
-            sy,
-            sWidth,
-            sHeight,
-            dx + intervalTime,
-            dy,
-            dWidth,
-            dHeight
-          );
-        });
-      }, 30);
-      return () => {
-        clearInterval(interval);
-      };
+      state.images.forEach((image) => {
+        const { dHeight, dWidth, dx, dy, element, sHeight, sWidth, sx, sy } =
+          image;
+
+        ctx.drawImage(
+          element,
+          sx,
+          sy,
+          sWidth,
+          sHeight,
+          dx,
+          dy,
+          dWidth,
+          dHeight
+        );
+      });
     }
   }, [state]);
 
@@ -73,16 +68,26 @@ export function Index() {
         })
       );
     };
+    const mousemove = (event: MouseEvent) => {
+      dispatch(
+        D.mouseMove({
+          event,
+          canvas: ctx, // TODO: is it necessary? If not remove canvas dependecy
+        })
+      );
+    };
     canvasRef.current.addEventListener('mousedown', mousedown);
-    canvasRef.current.addEventListener('mouseup', mouseup);
+    document.addEventListener('mouseup', mouseup);
+    document.addEventListener('mousemove', mousemove);
     return () => {
       canvas.current.removeEventListener('mousedown', mousedown);
-      canvas.current.removeEventListener('mouseup', mouseup);
+      document.body.removeEventListener('mouseup', mouseup);
+      document.removeEventListener('mousemove', mousemove);
     };
   }, []);
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} id="hello">
       <canvas
         ref={canvasRef}
         width="640"

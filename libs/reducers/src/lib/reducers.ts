@@ -20,6 +20,7 @@ export const loadingImagesLoaded = (
     const ratio = Math.min(hRatio, vRatio);
     const centerShift_x = (canvas.width - img.width * ratio) / 2;
     const centerShift_y = (canvas.height - img.height * ratio) / 2;
+    const dx = centerShift_x + i * canvas.width;
 
     return {
       element: img,
@@ -27,10 +28,11 @@ export const loadingImagesLoaded = (
       sy: 0,
       sWidth: img.width,
       sHeight: img.height,
-      dx: centerShift_x + i * canvas.width,
+      dx,
       dy: centerShift_y,
       dWidth: img.width * ratio,
       dHeight: img.height * ratio,
+      initialdx: dx,
     };
   });
 
@@ -46,6 +48,7 @@ export const idleMouseDown = (
 ): D.Dragging => ({
   kind: 'Dragging',
   images: state.images,
+  pointerx: _action.payload.event.clientX,
 });
 
 export const draggingMouseUp = (
@@ -53,8 +56,32 @@ export const draggingMouseUp = (
   _action: D.MouseUp
 ): D.Idle => ({
   kind: 'Idle',
-  images: state.images,
+  images: state.images.map((image) => {
+    return {
+      ...image,
+      initialdx: image.dx,
+    };
+  }),
 });
+
+export const draggingMouseMove = (
+  state: D.Dragging,
+  action: D.MouseMove
+): D.Dragging => {
+  const dx = action.payload.event.clientX;
+
+  const images = state.images.map((image) => {
+    return {
+      ...image,
+      dx: image.initialdx + dx - state.pointerx,
+    };
+  });
+
+  return {
+    ...state,
+    images,
+  };
+};
 
 export const reducer = (state: D.State, action: D.Action): D.State => {
   switch (state.kind) {
@@ -72,7 +99,6 @@ export const reducer = (state: D.State, action: D.Action): D.State => {
     case 'Idle':
       switch (action.kind) {
         case 'MouseDown':
-          console.log('MouseDown');
           return idleMouseDown(state, action);
         case 'ImagesLoaded':
         case 'MouseUp':
@@ -84,10 +110,10 @@ export const reducer = (state: D.State, action: D.Action): D.State => {
     case 'Dragging':
       switch (action.kind) {
         case 'MouseUp':
-          console.log('MOUSEUP');
           return draggingMouseUp(state, action);
-        case 'MouseDown':
         case 'MouseMove':
+          return draggingMouseMove(state, action);
+        case 'MouseDown':
         case 'ImagesLoaded':
           return noop(state, action);
         default:

@@ -21,19 +21,72 @@ const images = [
   { width: 853, height: 1280 },
 ] as Array<HTMLImageElement>;
 
+const loadingImagesLoadedIdle = () => {
+  const given: D.Loading = {
+    kind: 'Loading',
+  };
+  const when = D.imagesLoaded({
+    canvas,
+    images,
+  });
+  return reducer(given, when);
+};
+
+const idleMouseDownDragging = () => {
+  const event = {
+    clientX: 325,
+  } as MouseEvent;
+
+  const given = loadingImagesLoadedIdle();
+
+  const when = D.mouseDown({
+    canvas,
+    event,
+  });
+  return reducer(given, when);
+};
+
 describe('reducers', () => {
   it('Loading-ImagesLoaded-Idle', () => {
-    const given: D.Idle = {
-      images: [],
-      kind: 'Idle',
-    };
-    const when: D.ImagesLoaded = {
-      kind: 'ImagesLoaded',
-      payload: {
-        canvas,
-        images,
-      },
-    };
-    expect(reducer(given, when)).toMatchSnapshot();
+    const state = loadingImagesLoadedIdle();
+    expect(state.kind).toBe('Idle');
+    expect(state).toMatchSnapshot();
+  });
+
+  it('Idle-MouseDown-Dragging', () => {
+    const state = idleMouseDownDragging();
+    expect(state.kind).toBe('Dragging');
+    expect(state).toMatchSnapshot();
+  });
+
+  it('Dragging-MouseUp-Idle', () => {
+    const event = {} as MouseEvent;
+    const given = idleMouseDownDragging();
+
+    const when = D.mouseUp({
+      canvas,
+      event,
+    });
+    const then = reducer(given, when);
+
+    expect(then.kind).toBe('Idle');
+    expect(then).toMatchSnapshot();
+  });
+
+  it('Dragging-MouseMove-Dragging', () => {
+    const event = {
+      clientX: 292,
+    } as MouseEvent;
+
+    const given = idleMouseDownDragging();
+
+    const when = D.mouseMove({
+      canvas,
+      event,
+    });
+    const then = reducer(given, when);
+
+    expect(then.kind).toBe('Dragging');
+    expect(then).toMatchSnapshot();
   });
 });
