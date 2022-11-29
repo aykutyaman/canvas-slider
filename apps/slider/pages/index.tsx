@@ -2,7 +2,6 @@ import { useEffect, useReducer, useRef } from 'react';
 import styles from './index.module.css';
 import { reducer } from '@publitas/reducers';
 import * as D from '@publitas/domain';
-import * as _ from 'underscore';
 
 export function Index() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

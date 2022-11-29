@@ -14,13 +14,32 @@ export const loadingImagesLoaded = (
 ): D.Idle => {
   const ctx = action.payload.canvas; // ctx.canvas;
   const canvas = ctx.canvas;
-  const images: Array<D.Image> = action.payload.images.map((img, i) => {
+  const images: Array<D.Image> = action.payload.images.map((img, i, arr) => {
     const hRatio = canvas.width / img.width;
     const vRatio = canvas.height / img.height;
+
     const ratio = Math.min(hRatio, vRatio);
-    const centerShift_x = (canvas.width - img.width * ratio) / 2;
-    const centerShift_y = (canvas.height - img.height * ratio) / 2;
-    const dx = centerShift_x + i * canvas.width;
+
+    const scaledImageWidth = img.width * ratio;
+    const emptySpaceX = canvas.width - scaledImageWidth;
+    const centerShiftX = emptySpaceX / 2;
+
+    const scaledImageHeight = img.height * ratio;
+    const emptySpaceY = canvas.height - scaledImageHeight;
+    const centerShiftY = emptySpaceY / 2;
+
+    /*
+      If the with of the image fits perfectly into the canvas the centerShiftX will
+      be zero. we move each image to the right multiplying the width
+      of the canvas with the current image's iteration index.
+     */
+    const dx = centerShiftX + i * canvas.width;
+
+    const rdx = -(
+      centerShiftX +
+      (arr.length - 1 - i) * canvas.width -
+      centerShiftX
+    );
 
     return {
       element: img,
@@ -29,10 +48,12 @@ export const loadingImagesLoaded = (
       sWidth: img.width,
       sHeight: img.height,
       dx,
-      dy: centerShift_y,
-      dWidth: img.width * ratio,
-      dHeight: img.height * ratio,
+      dy: centerShiftY,
+      dWidth: scaledImageWidth,
+      dHeight: scaledImageHeight,
       initialdx: dx,
+      leftalignedx: dx,
+      rightalignedx: rdx,
     };
   });
 
@@ -68,14 +89,47 @@ export const draggingMouseMove = (
   state: D.Dragging,
   action: D.MouseMove
 ): D.Dragging => {
-  const dx = action.payload.event.clientX;
+  const clientX = action.payload.event.clientX;
 
   const images = state.images.map((image) => {
     return {
       ...image,
-      dx: image.initialdx + dx - state.pointerx,
+      dx: image.initialdx + clientX - state.pointerx,
     };
   });
+
+  const minMax = images.reduce(
+    ([min, max], image) => {
+      return [image.dx < min ? image.dx : min, image.dx > max ? image.dx : max];
+    },
+    [+Infinity, -Infinity]
+  );
+
+  if (minMax[0] > 0) {
+    const images = state.images.map((image) => {
+      return {
+        ...image,
+        dx: image.leftalignedx,
+      };
+    });
+    return {
+      ...state,
+      images,
+    };
+  }
+
+  if (minMax[1] < 0) {
+    const images = state.images.map((image) => {
+      return {
+        ...image,
+        dx: image.rightalignedx,
+      };
+    });
+    return {
+      ...state,
+      images,
+    };
+  }
 
   return {
     ...state,

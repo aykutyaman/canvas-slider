@@ -10,7 +10,15 @@ export type Image = {
   dy: number;
   dWidth: number;
   dHeight: number;
+  /*
+    - it's the initial image dx, when the user starts moving
+    the images. It's changed only with mouseup event. When the mouseup
+    event will be fired it'll be updated with the current dx of the
+    image.
+   */
   initialdx: number;
+  leftalignedx: number;
+  rightalignedx: number;
 };
 
 export type Images = {
@@ -27,6 +35,12 @@ export type Idle = {
 
 export type Dragging = {
   kind: 'Dragging';
+  /*
+    This position will be set with mouse down event. It'll be used in
+    combination with initialdx of the image to make the calculation
+    of the image dx idempotent. So, dispatching the dragging event
+    multiple times with the same input will result the same state.
+   */
   pointerx: number;
 } & Images;
 
