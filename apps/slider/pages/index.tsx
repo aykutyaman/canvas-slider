@@ -2,89 +2,10 @@ import { useEffect, useReducer, useRef } from 'react';
 import styles from './index.module.css';
 import { reducer } from '@publitas/reducers';
 import * as D from '@publitas/domain';
+import { useCanvas } from '@publitas/hooks/use-canvas';
 
 export function Index() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  const [state, dispatch] = useReducer(reducer, D.initialState);
-
-  useEffect(() => {
-    if (state.kind === 'Loading') {
-      const ctx = canvasRef.current.getContext('2d');
-      ctx.fillStyle = '#000000';
-      const imagesNodes = canvasRef.current.children;
-      const images = Array.from(imagesNodes) as Array<HTMLImageElement>;
-      dispatch(
-        D.imagesLoaded({
-          canvas: ctx,
-          images,
-        })
-      );
-    }
-  }, [state]);
-
-  useEffect(() => {
-    if (state.kind === 'Idle' || state.kind === 'Dragging') {
-      const ctx = canvasRef.current.getContext('2d');
-
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-      state.images.forEach((image) => {
-        const { dHeight, dWidth, dx, dy, element, sHeight, sWidth, sx, sy } =
-          image;
-
-        ctx.drawImage(
-          element,
-          sx,
-          sy,
-          sWidth,
-          sHeight,
-          dx,
-          dy,
-          dWidth,
-          dHeight
-        );
-      });
-    }
-  }, [state]);
-
-  useEffect(() => {
-    const canvas = canvasRef;
-    const ctx = canvas.current.getContext('2d');
-    const mousedown = (event: MouseEvent) => {
-      dispatch(
-        D.mouseDown({
-          event,
-          canvas: ctx, // TODO: is it necessary? If not remove canvas dependecy
-        })
-      );
-    };
-    const mouseup = (event: MouseEvent) => {
-      dispatch(
-        D.mouseUp({
-          event,
-          canvas: ctx, // TODO: is it necessary? If not remove canvas dependecy
-        })
-      );
-    };
-    const mousemove = (event: MouseEvent) => {
-      dispatch(
-        D.mouseMove({
-          event,
-          canvas: ctx, // TODO: is it necessary? If not remove canvas dependecy
-        })
-      );
-    };
-    canvasRef.current.addEventListener('mousedown', mousedown);
-    document.addEventListener('mouseup', mouseup);
-    document.addEventListener('mousemove', mousemove);
-    return () => {
-      canvas.current.removeEventListener('mousedown', mousedown);
-      document.body.removeEventListener('mouseup', mouseup);
-      document.removeEventListener('mousemove', mousemove);
-    };
-  }, []);
-
+  const canvasRef = useCanvas();
   return (
     <div className={styles.page} id="hello">
       <canvas
