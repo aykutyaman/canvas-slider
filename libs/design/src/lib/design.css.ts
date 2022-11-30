@@ -1,6 +1,8 @@
 import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
 import { vars } from './vars.css';
 
+const flexAlignment = ['flex-start', 'center', 'flex-end', 'stretch'] as const;
+
 export const breakpoint = {
   xs: 0,
   sm: 600,
@@ -30,6 +32,7 @@ const responsiveProperties = defineProperties({
   },
   defaultCondition: 'default',
   properties: {
+    alignItems: flexAlignment,
     display: [
       'block',
       'inline',
@@ -42,7 +45,7 @@ const responsiveProperties = defineProperties({
       'contents',
     ],
     flexDirection: ['row', 'column', 'row-reverse', 'column-reverse'],
-    justifyContent: ['flex-start', 'center', 'flex-end', 'stretch'],
+    justifyContent: flexAlignment,
     marginBottom: vars.space,
     marginLeft: vars.space,
     marginRight: vars.space,
