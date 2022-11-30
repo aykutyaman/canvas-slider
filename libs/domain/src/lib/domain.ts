@@ -85,7 +85,17 @@ export type ImagesLoaded = {
   payload: ImagesPayload;
 };
 
-export type Action = MouseDown | MouseUp | MouseMove | ImagesLoaded;
+export type WindowResized = {
+  kind: 'WindowResized';
+  payload: ImagesPayload;
+};
+
+export type Action =
+  | MouseDown
+  | MouseUp
+  | MouseMove
+  | ImagesLoaded
+  | WindowResized;
 
 // Action creators
 export type MousePayload = {
@@ -106,5 +116,9 @@ export const mouseMove = (payload: MousePayload): MouseMove => ({
 });
 export const imagesLoaded = (payload: ImagesPayload): ImagesLoaded => ({
   kind: 'ImagesLoaded',
+  payload,
+});
+export const windowResized = (payload: ImagesPayload): WindowResized => ({
+  kind: 'WindowResized',
   payload,
 });

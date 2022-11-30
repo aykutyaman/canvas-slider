@@ -1,9 +1,8 @@
-import styles from './index.module.css';
 import CanvasSlider from '../components/canvas-slider/canvas-slider';
 
 export function Index() {
   return (
-    <div className={styles.page}>
+    <div>
       <CanvasSlider>
         <img src="/0.jpg" />
         <img src="/1.jpg" />

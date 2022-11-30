@@ -63,6 +63,61 @@ export const loadingImagesLoaded = (
   };
 };
 
+export const idleWindowResized = (
+  _state: D.Idle,
+  action: D.WindowResized
+): D.Idle => {
+  const ctx = action.payload.canvas; // ctx.canvas;
+  const canvas = ctx.canvas;
+  const images: Array<D.Image> = action.payload.images.map((img, i, arr) => {
+    const hRatio = canvas.width / img.width;
+    const vRatio = canvas.height / img.height;
+
+    const ratio = Math.min(hRatio, vRatio);
+
+    const scaledImageWidth = img.width * ratio;
+    const emptySpaceX = canvas.width - scaledImageWidth;
+    const centerShiftX = emptySpaceX / 2;
+
+    const scaledImageHeight = img.height * ratio;
+    const emptySpaceY = canvas.height - scaledImageHeight;
+    const centerShiftY = emptySpaceY / 2;
+
+    /*
+      If the with of the image fits perfectly into the canvas the centerShiftX will
+      be zero. we move each image to the right multiplying the width
+      of the canvas with the current image's iteration index.
+     */
+    const dx = centerShiftX + i * canvas.width;
+
+    const rdx = -(
+      centerShiftX +
+      (arr.length - 1 - i) * canvas.width -
+      centerShiftX
+    );
+
+    return {
+      element: img,
+      sx: 0,
+      sy: 0,
+      sWidth: img.width,
+      sHeight: img.height,
+      dx,
+      dy: centerShiftY,
+      dWidth: scaledImageWidth,
+      dHeight: scaledImageHeight,
+      initialdx: dx,
+      leftalignedx: dx,
+      rightalignedx: rdx,
+    };
+  });
+
+  return {
+    kind: 'Idle',
+    images,
+  };
+};
+
 export const idleMouseDown = (
   state: D.Idle,
   _action: D.MouseDown
@@ -146,6 +201,7 @@ export const reducer = (state: D.State, action: D.Action): D.State => {
         case 'MouseDown':
         case 'MouseUp':
         case 'MouseMove':
+        case 'WindowResized':
           return noop(state, action);
         default:
           return assertNever(action);
@@ -154,6 +210,8 @@ export const reducer = (state: D.State, action: D.Action): D.State => {
       switch (action.kind) {
         case 'MouseDown':
           return idleMouseDown(state, action);
+        case 'WindowResized':
+          return idleWindowResized(state, action);
         case 'ImagesLoaded':
         case 'MouseUp':
         case 'MouseMove':
@@ -169,6 +227,7 @@ export const reducer = (state: D.State, action: D.Action): D.State => {
           return draggingMouseMove(state, action);
         case 'MouseDown':
         case 'ImagesLoaded':
+        case 'WindowResized':
           return noop(state, action);
         default:
           return assertNever(action);

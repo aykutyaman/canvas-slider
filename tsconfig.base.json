@@ -17,6 +17,9 @@
     "paths": {
       "@publitas/domain": ["libs/domain/src/index.ts"],
       "@publitas/hooks/use-canvas": ["libs/hooks/use-canvas/src/index.ts"],
+      "@publitas/hooks/use-media-query": [
+        "libs/hooks/use-media-query/src/index.ts"
+      ],
       "@publitas/reducers": ["libs/reducers/src/index.ts"]
     }
   },

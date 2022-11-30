@@ -1,12 +1,43 @@
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useLayoutEffect, useReducer, useRef } from 'react';
 import { reducer } from '@publitas/reducers';
 import * as D from '@publitas/domain';
+import { useMediaQuery } from '@publitas/hooks/use-media-query';
 
 export const useCanvas = () => {
+  const xs = useMediaQuery('xs');
+  const sm = useMediaQuery('sm');
+  const md = useMediaQuery('md');
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasCtxRef = useRef<CanvasRenderingContext2D | null>(null);
 
   const [state, dispatch] = useReducer(reducer, D.initialState);
+
+  // Resize responsively canvas size
+  useEffect(() => {
+    const ctx = canvasCtxRef.current;
+    if (canvasRef.current && ctx) {
+      if (md) {
+        canvasRef.current.width = 990;
+        canvasRef.current.height = 562.5;
+      } else if (sm) {
+        canvasRef.current.width = 600;
+        canvasRef.current.height = 375;
+      } else {
+        canvasRef.current.width = 340;
+        canvasRef.current.height = 212.5;
+      }
+
+      const imagesNodes = canvasRef.current.children;
+      const images = Array.from(imagesNodes) as Array<HTMLImageElement>;
+      dispatch(
+        D.windowResized({
+          canvas: ctx,
+          images,
+        })
+      );
+    }
+  }, [xs, sm, md]);
 
   // Initialize canvasCtxRef
   useEffect(() => {
