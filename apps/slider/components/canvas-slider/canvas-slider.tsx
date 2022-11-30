@@ -1,5 +1,5 @@
 import { useCanvas } from '@publitas/hooks/use-canvas';
-import styles from './canvas-slider.module.css';
+import * as styles from './canvas-slider.css';
 
 export interface CanvasSliderProps {
   children?: React.ReactNode;
