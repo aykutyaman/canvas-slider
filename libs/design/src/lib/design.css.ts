@@ -2,10 +2,10 @@ import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
 import { vars } from './vars.css';
 
 export const breakpoint = {
-  sm: 480,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
+  xs: 0,
+  sm: 600,
+  md: 900,
+  lg: 1200,
 } as const;
 export type Breakpoint = keyof typeof breakpoint;
 export const breakpointNames = Object.keys(breakpoint) as Breakpoint[];

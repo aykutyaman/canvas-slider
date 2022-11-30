@@ -1,21 +1,11 @@
 import { useEffect, useState } from 'react';
+import { breakpoints, Breakpoint } from '@publitas/design';
 
-export function hooksUseMediaQuery(): string {
-  return 'hooks-use-media-query';
-}
-
-export const sizes = {
-  xs: 0,
-  sm: '600px',
-  md: '900px',
-  lg: '1200px',
-};
-
-export const useMediaQuery = (screen: keyof typeof sizes) => {
+export const useMediaQuery = (screen: Breakpoint) => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    const query = `(min-width: ${sizes[screen]})`;
+    const query = breakpoints[screen]['@media'];
     const media = window.matchMedia(query);
     if (media.matches !== matches) {
       setMatches(media.matches);

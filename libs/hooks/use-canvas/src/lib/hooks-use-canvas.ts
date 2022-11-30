@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import { reducer } from '@publitas/reducers';
 import * as D from '@publitas/domain';
 import { useMediaQuery } from '@publitas/hooks/use-media-query';
