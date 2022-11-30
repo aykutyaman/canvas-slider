@@ -10,6 +10,7 @@
   "private": true,
   "dependencies": {
     "@nrwl/next": "15.2.1",
+    "@vanilla-extract/sprinkles": "^1.5.1",
     "core-js": "^3.6.5",
     "next": "13.0.0",
     "react": "18.2.0",
