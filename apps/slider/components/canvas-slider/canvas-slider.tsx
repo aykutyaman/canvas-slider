@@ -8,9 +8,11 @@ export interface CanvasSliderProps {
 export function CanvasSlider({ children }: CanvasSliderProps) {
   const canvasRef = useCanvas();
   return (
-    <canvas ref={canvasRef} className={styles.container}>
-      {children}
-    </canvas>
+    <div className={styles.container}>
+      <canvas ref={canvasRef} className={styles.canvas}>
+        {children}
+      </canvas>
+    </div>
   );
 }
 

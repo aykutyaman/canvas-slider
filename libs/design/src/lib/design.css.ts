@@ -1,4 +1,5 @@
 import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
+import { vars } from './vars.css';
 
 export const breakpoint = {
   sm: 480,
@@ -40,6 +41,24 @@ const responsiveProperties = defineProperties({
       'flow-root',
       'contents',
     ],
+    flexDirection: ['row', 'column', 'row-reverse', 'column-reverse'],
+    justifyContent: ['flex-start', 'center', 'flex-end', 'stretch'],
+    marginBottom: vars.space,
+    marginLeft: vars.space,
+    marginRight: vars.space,
+    marginTop: vars.space,
+    paddingTop: vars.space,
+    paddingBottom: vars.space,
+    paddingLeft: vars.space,
+    paddingRight: vars.space,
+  },
+  shorthands: {
+    padding: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
+    paddingX: ['paddingLeft', 'paddingRight'],
+    paddingY: ['paddingTop', 'paddingBottom'],
+    margin: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight'],
+    marginX: ['marginLeft', 'marginRight'],
+    marginY: ['marginTop', 'marginBottom'],
   },
 });
 
