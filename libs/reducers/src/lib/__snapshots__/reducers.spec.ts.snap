@@ -4,6 +4,7 @@ exports[`reducers Dragging-MouseMove-Dragging 1`] = `
 Object {
   "images": Array [
     Object {
+      "centerShiftX": 0,
       "dHeight": 400,
       "dWidth": 640,
       "dx": -33,
@@ -21,6 +22,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 0,
       "dHeight": 320,
       "dWidth": 640,
       "dx": 607,
@@ -38,6 +40,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 53.333333333333314,
       "dHeight": 400,
       "dWidth": 533.3333333333334,
       "dx": 1300.3333333333333,
@@ -55,6 +58,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 186.71875,
       "dHeight": 400,
       "dWidth": 266.5625,
       "dx": 2073.71875,
@@ -81,6 +85,7 @@ exports[`reducers Dragging-MouseUp-Idle 1`] = `
 Object {
   "images": Array [
     Object {
+      "centerShiftX": 0,
       "dHeight": 400,
       "dWidth": 640,
       "dx": 0,
@@ -98,6 +103,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 0,
       "dHeight": 320,
       "dWidth": 640,
       "dx": 640,
@@ -115,6 +121,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 53.333333333333314,
       "dHeight": 400,
       "dWidth": 533.3333333333334,
       "dx": 1333.3333333333333,
@@ -132,6 +139,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 186.71875,
       "dHeight": 400,
       "dWidth": 266.5625,
       "dx": 2106.71875,
@@ -157,6 +165,7 @@ exports[`reducers Idle-MouseDown-Dragging 1`] = `
 Object {
   "images": Array [
     Object {
+      "centerShiftX": 0,
       "dHeight": 400,
       "dWidth": 640,
       "dx": 0,
@@ -174,6 +183,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 0,
       "dHeight": 320,
       "dWidth": 640,
       "dx": 640,
@@ -191,6 +201,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 53.333333333333314,
       "dHeight": 400,
       "dWidth": 533.3333333333334,
       "dx": 1333.3333333333333,
@@ -208,6 +219,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 186.71875,
       "dHeight": 400,
       "dWidth": 266.5625,
       "dx": 2106.71875,
@@ -234,6 +246,7 @@ exports[`reducers Loading-ImagesLoaded-Idle 1`] = `
 Object {
   "images": Array [
     Object {
+      "centerShiftX": 0,
       "dHeight": 400,
       "dWidth": 640,
       "dx": 0,
@@ -251,6 +264,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 0,
       "dHeight": 320,
       "dWidth": 640,
       "dx": 640,
@@ -268,6 +282,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 53.333333333333314,
       "dHeight": 400,
       "dWidth": 533.3333333333334,
       "dx": 1333.3333333333333,
@@ -285,6 +300,7 @@ Object {
       "sy": 0,
     },
     Object {
+      "centerShiftX": 186.71875,
       "dHeight": 400,
       "dWidth": 266.5625,
       "dx": 2106.71875,

@@ -19,6 +19,7 @@ export type Image = {
   initialdx: number;
   leftalignedx: number;
   rightalignedx: number;
+  centerShiftX: number;
 };
 
 export type Images = {

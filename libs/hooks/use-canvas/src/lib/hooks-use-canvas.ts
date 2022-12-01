@@ -19,7 +19,7 @@ export const useCanvas = () => {
     if (canvasRef.current && ctx) {
       if (md) {
         canvasRef.current.width = 990;
-        canvasRef.current.height = 562.5;
+        canvasRef.current.height = 618.75;
       } else if (sm) {
         canvasRef.current.width = 600;
         canvasRef.current.height = 375;
