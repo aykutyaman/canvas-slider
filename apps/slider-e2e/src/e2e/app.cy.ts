@@ -1,13 +1,31 @@
-import { getGreeting } from '../support/app.po';
+import { downloadPng } from '../support/downloadPng';
+import ensureCanvasStatic from '../support/ensureCanvasStatic';
+import looksSame from '../support/looksSame';
+
+const platform = Cypress.platform;
 
 describe('slider', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('should display images on the canvas', () => {
+    const filename = 'idle.png';
+    ensureCanvasStatic('canvas');
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome slider');
+    // downloadPng(`./images/${platform}/${filename}`);
+    looksSame(`./snapshots/${platform}/${filename}`, true);
+  });
+
+  it('should drag first image to left', () => {
+    const filename = 'dragging-first-image-to-left.png';
+    ensureCanvasStatic('canvas');
+
+    cy.get('canvas')
+      .trigger('mousedown', { clientX: 200, clientY: 200 })
+      .trigger('mousemove', { clientX: 0, clientY: 0 })
+      .trigger('mouseup');
+    cy.log(platform);
+
+    // downloadPng(`./images/${platform}/${filename}`);
+    looksSame(`./snapshots/${platform}/${filename}`, true);
   });
 });

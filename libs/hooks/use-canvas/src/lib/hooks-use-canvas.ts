@@ -88,11 +88,6 @@ export const useCanvas = () => {
             dWidth,
             dHeight
           );
-
-          ctx.beginPath();
-          ctx.strokeStyle = '#f00'; // some color/style
-          ctx.lineWidth = 2;
-          ctx.strokeRect(dx, dy, dWidth, dHeight);
         });
       }
     }
