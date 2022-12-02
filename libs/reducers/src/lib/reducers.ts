@@ -18,13 +18,13 @@ export const loadingImagesLoaded = (
 });
 
 export const idleWindowResized = (
-  _state: D.Idle,
+  state: D.Idle,
   action: D.WindowResized
 ): D.Idle => ({
   kind: 'Idle',
-  images: action.payload.images.map(
-    calculateImage(action.payload.canvas.canvas)
-  ),
+  images: state.images
+    .map((image) => image.element)
+    .map(calculateImage(action.payload.canvas.canvas)),
 });
 
 export const idleMouseDown = (

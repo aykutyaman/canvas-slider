@@ -15,27 +15,25 @@ export const useCanvas = () => {
 
   // Resize responsively canvas size
   useEffect(() => {
-    const ctx = canvasCtxRef.current;
-    if (canvasRef.current && ctx) {
-      if (md) {
-        canvasRef.current.width = 990;
-        canvasRef.current.height = 618.75;
-      } else if (sm) {
-        canvasRef.current.width = 600;
-        canvasRef.current.height = 375;
-      } else {
-        canvasRef.current.width = 340;
-        canvasRef.current.height = 212.5;
+    if (state.kind === 'Idle') {
+      const ctx = canvasCtxRef.current;
+      if (canvasRef.current && ctx) {
+        if (md) {
+          canvasRef.current.width = 990;
+          canvasRef.current.height = 618.75;
+        } else if (sm) {
+          canvasRef.current.width = 600;
+          canvasRef.current.height = 375;
+        } else {
+          canvasRef.current.width = 340;
+          canvasRef.current.height = 212.5;
+        }
+        dispatch(
+          D.windowResized({
+            canvas: ctx,
+          })
+        );
       }
-
-      const imagesNodes = canvasRef.current.children;
-      const images = Array.from(imagesNodes) as Array<HTMLImageElement>;
-      dispatch(
-        D.windowResized({
-          canvas: ctx,
-          images,
-        })
-      );
     }
   }, [xs, sm, md]);
 
@@ -51,7 +49,6 @@ export const useCanvas = () => {
     if (state.kind === 'Loading') {
       if (canvasRef.current && canvasCtxRef.current) {
         const ctx = canvasCtxRef.current;
-        ctx.fillStyle = '#000000';
 
         const imagesNodes = canvasRef.current.children;
         const images = Array.from(imagesNodes) as Array<HTMLImageElement>;
@@ -96,7 +93,6 @@ export const useCanvas = () => {
   // Register mouse event listeners
   useEffect(() => {
     const ctx = canvasCtxRef.current;
-
     const mousedown = (event: MouseEvent) => {
       if (ctx) {
         dispatch(

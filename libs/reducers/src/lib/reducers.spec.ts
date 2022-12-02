@@ -1,6 +1,12 @@
 import * as D from '@publitas/domain';
 import { reducer } from './reducers';
 
+/*
+  TODO: implement a better testing strategy.
+  These tests don't cover state transitions with proper data yet.
+  Generate these tests with something like fast-check
+*/
+
 const canvas = {
   canvas: {
     width: 640,

@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build && nx export",
-    "test": "nx run-many --target=test projects=reducers"
+    "test": "nx test reducers",
+    "test:e2e": "npx nx e2e slider-e2e",
+    "test:e2e:watch": "npx nx e2e slider-e2e --watch"
   },
   "private": true,
   "dependencies": {

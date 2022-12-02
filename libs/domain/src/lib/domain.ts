@@ -88,7 +88,7 @@ export type ImagesLoaded = {
 
 export type WindowResized = {
   kind: 'WindowResized';
-  payload: ImagesPayload;
+  payload: Omit<ImagesPayload, 'images'>;
 };
 
 export type Action =
@@ -119,7 +119,10 @@ export const imagesLoaded = (payload: ImagesPayload): ImagesLoaded => ({
   kind: 'ImagesLoaded',
   payload,
 });
-export const windowResized = (payload: ImagesPayload): WindowResized => ({
+
+export const windowResized = (
+  payload: Omit<ImagesPayload, 'images'>
+): WindowResized => ({
   kind: 'WindowResized',
   payload,
 });
